@@ -15,6 +15,13 @@ LIMIT=$2
 backup_folder="$HOME/backup_for_laba"
 number_to_archive="${3:-3}"  #default number of files that will be archivating - 3
 
+if [ -n "$(ls disk*.img 2>/dev/null)" ]; then
+  image_file=$(ls -t disk*.img 2>/dev/null | head -n 1)
+else
+  echo "ERROR - The virtual disk image file was not found: $image_file"
+  exit 1
+fi
+
 echo "the FOLDER_PATH you entered: $FOLDER_PATH"
 
 #check whether the path exists
